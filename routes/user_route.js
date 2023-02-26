@@ -41,8 +41,8 @@ router.post("/signup", [
 
         // .then((user) => res.json(user));  //tocheck the user is created or not
         const userIdData = {
-            UserModel: {
-                id: UserModel.id
+            user: {
+                id: user.id
             }
         }
         const authentication = jwt.sign(userIdData, JWT_SECRET);
@@ -80,10 +80,9 @@ router.post("/login", [
         if (!passwordCompare) {
             return res.status(400).json({ error: "Please try to login with correct creadentials" })
         }
-
         const userIdData = {
-            UserModel: {
-                id: UserModel.id
+            user: {
+                id: user.id
             }
         }
         const authentication = jwt.sign(userIdData, JWT_SECRET);
@@ -101,11 +100,9 @@ router.post("/login", [
 router.post("/getuser", fetchuser, async (req, res) => {
 
     try {
-        const userId = req.UserModel.id;
-        console.log({ userId });
+        const userId = req.user.id;
         const user = await UserModel.findById(userId).select("-password"); //-password means we selected all the fields except password
         res.send(user);
-        console.log(user);
 
     } catch (error) {  //if any error occured this statement catch the error.
         console.error(error.message);
