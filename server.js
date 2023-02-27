@@ -23,8 +23,8 @@ require('./models/user_model');  //importing user model
 app.use(require('./routes/user_route'));    //using user route
 
 
-// require('./models/post_models');  //importing user model
-// app.use(require('./routes/post_route'))
+require('./models/post_models');  //importing user model
+app.use(require('./routes/post_route'))
 
 
 app.listen(port, () => console.log(`Sales app is running on port ${port}!`))
